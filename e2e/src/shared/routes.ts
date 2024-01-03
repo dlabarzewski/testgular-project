@@ -3,6 +3,8 @@ import { APP_URL } from './app-config';
 
 export enum Routes {
   HOMEPAGE = '/',
+  PANEL_LOGIN = '/panel/login',
+  PANEL = '/panel',
 }
 
 const MOVIE_SLUG_PATTERN = '\\d+\\-[a-z0-9\\-]+';
