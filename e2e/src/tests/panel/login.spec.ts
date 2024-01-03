@@ -6,10 +6,9 @@ import {
   ElementLocator,
   escapeRegExp,
 } from '@lowgular/testgular';
-import { APP_CONFIG } from '../../shared/app-config';
-import { Routes } from '../../shared/routes';
-import { LoginFormElement } from 'e2e/src/components/form/login-form';
-import { login } from 'e2e/src/utils/login';
+import { LoginFormElement } from '@components';
+import { login } from '@utils';
+import { APP_CONFIG, Routes } from '@shared';
 
 describe('Login Page', () => {
   [

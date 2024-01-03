@@ -7,7 +7,7 @@ export enum Routes {
   PANEL = '/panel',
 }
 
-const MOVIE_SLUG_PATTERN = '\\d+\\-[a-z0-9\\-]+';
+const MOVIE_SLUG_PATTERN = '\\d+\\-[a-z0-9\\-]+'; // TODO: positive number
 const GENRE_SLUG_PATTERN = '[a-z\\-]+';
 
 export const RoutesPattern = {

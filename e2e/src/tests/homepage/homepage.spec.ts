@@ -1,3 +1,4 @@
+import { HeaderElement, SubHeaderElement, ListingListElement, GenresListElement } from '@components';
 import {
   App,
   it,
@@ -7,12 +8,7 @@ import {
   escapeRegExp,
   ContainerElement,
 } from '@lowgular/testgular';
-import { APP_CONFIG } from '../../shared/app-config';
-import { Routes, RoutesPattern } from '../../shared/routes';
-import { HeaderElement } from '../../components/header';
-import { SubHeaderElement } from '../../components/sub-header';
-import { ListingListElement } from '../../components/listing-list';
-import { GenresListElement } from '../../components/genres-list';
+import { APP_CONFIG, Routes, RoutesPattern } from '@shared';
 
 describe('Homepage', () => {
   // headers

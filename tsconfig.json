@@ -13,8 +13,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@utils": ["./e2e/src/utils"],
+      "@shared": ["./e2e/src/shared"],
+      "@components": ["./e2e/src/components"],
+    }
   },
   "files": [],
   "include": [],

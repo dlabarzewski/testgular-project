@@ -1,7 +1,6 @@
 import { ElementLocator, Router } from '@lowgular/testgular';
-import { Routes } from '../shared/routes';
 import { LoginFormElement } from '../components/form/login-form';
-import { PANEL_EMAIL, PANEL_PASSWORD } from '../shared/app-config';
+import { PANEL_EMAIL, PANEL_PASSWORD, Routes } from '@shared';
 
 const CREDENTIALS = {
   email: PANEL_EMAIL,
