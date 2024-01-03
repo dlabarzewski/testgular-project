@@ -13,9 +13,9 @@ export class ListingListElement extends ContainerElement {
     ListingItemElement.Selector
   );
 
-  async expectChildrensData(url: StringOrRegExp) {
+  async expectChildrensData(urlPattern: StringOrRegExp) {
     await this._items.forEachChild(async (child: ListingItemElement) => {
-      await child.expectData(url);
+      await child.expectData(urlPattern);
     });
   }
 

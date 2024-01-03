@@ -13,9 +13,9 @@ export class GenresListElement extends ContainerElement {
     GenresItemElement.Selector
   );
 
-  async expectChildrensData(url: StringOrRegExp) {
+  async expectChildrensData(urlPattern: StringOrRegExp) {
     await this._items.forEachChild(async (child: GenresItemElement) => {
-      await child.expectData(url);
+      await child.expectData(urlPattern);
     });
   }
 }

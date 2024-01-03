@@ -14,8 +14,8 @@ export class GenresItemElement extends ContainerElement {
     cssSelector('a')
   );
 
-  async expectData(url: StringOrRegExp) {
-    await this._link.expectAttribute('href', url);
+  async expectData(urlPattern: StringOrRegExp) {
+    await this._link.expectAttribute('href', urlPattern);
 
     await this.expectContent(NOT_EMPTY_MATCHER);
   }

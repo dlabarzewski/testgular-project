@@ -50,8 +50,8 @@ export class ListingItemElement extends ContainerElement {
     return await infoItems.getNthElement(infoItemsLength - 1);
   }
 
-  async expectData(url: StringOrRegExp) {
-    await this._link.expectAttribute('href', url);
+  async expectData(urlPattern: StringOrRegExp) {
+    await this._link.expectAttribute('href', urlPattern);
 
     await this._image.expectAttribute(
       'data-src',

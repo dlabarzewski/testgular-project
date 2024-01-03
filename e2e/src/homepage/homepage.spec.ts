@@ -5,6 +5,7 @@ import {
   Router,
   ElementLocator,
   escapeRegExp,
+  ContainerElement,
 } from '@lowgular/testgular';
 import { APP_CONFIG } from '../shared/app-config';
 import { Routes, RoutesPattern } from '../shared/routes';
@@ -14,70 +15,197 @@ import { ListingListElement } from '../components/listing-list';
 import { GenresListElement } from '../components/genres-list';
 
 describe('Homepage', () => {
+  // headers
   [
     {
+      testcase: 'Main section',
+      when: {
+        id: 'main-section',
+      },
       then: {
         header: 'Całe filmy i seriale online',
-        subheaders: [
-          'Popularne filmy',
-          'Gatunki filmów',
-          'Gdzie obejrzeć po polsku filmy bez reklam?',
-          'Popularne seriale',
-          'Gatunki seriali',
-          'Dowiedz się gdzie obejrzeć ulubione produkcje',
-        ],
       },
     },
-  ].forEach(({ then }) => {
-    it('Should test homepage content', APP_CONFIG, async (app: App) => {
-      const router = app.inject(Router);
-      const el = app.inject(ElementLocator);
+  ].forEach(({ testcase, when, then }) => {
+    it(
+      `Should test homepage headers: ${testcase}`,
+      APP_CONFIG,
+      async (app: App) => {
+        const router = app.inject(Router);
+        const el = app.inject(ElementLocator);
 
-      await router.navigateAndWait(Routes.HOMEPAGE);
+        await router.navigateAndWait(Routes.HOMEPAGE);
 
-      // h1
-      const header = el.locateChild(HeaderElement, HeaderElement.Selector);
-      await header.expectContent(escapeRegExp(then.header));
+        const section = el.locateChild(ContainerElement, when.id);
 
-      // h2
-      const subHeaders = el.locateList(
-        SubHeaderElement,
-        SubHeaderElement.Selector
-      );
-      await subHeaders.expectToHaveLength(then.subheaders.length);
-      await subHeaders.forEachChild(
-        async (subHeader: SubHeaderElement, index: number) => {
-          await subHeader.expectContent(escapeRegExp(then.subheaders[index]));
-        }
-      );
+        const header = section.elementLocator.locateChild(
+          HeaderElement,
+          HeaderElement.Selector
+        );
+        await header.expectContent(escapeRegExp(then.header));
+      }
+    );
+  });
 
-      const itemsLists = el.locateList(
-        ListingListElement,
-        ListingListElement.Selector
-      );
+  // sub headers
+  [
+    {
+      testcase: 'Movies section',
+      when: {
+        id: 'movies-section',
+      },
+      then: {
+        subheader: 'Popularne filmy',
+      },
+    },
+    {
+      testcase: 'Movie genres section',
+      when: {
+        id: 'movie-genres-section',
+      },
+      then: {
+        subheader: 'Gatunki filmów',
+      },
+    },
+    {
+      testcase: 'Middle section',
+      when: {
+        id: 'secondary-section',
+      },
+      then: {
+        subheader: 'Gdzie obejrzeć po polsku filmy bez reklam?',
+      },
+    },
+    {
+      testcase: 'Tvs section',
+      when: {
+        id: 'tvs-section',
+      },
+      then: {
+        subheader: 'Popularne seriale',
+      },
+    },
+    {
+      testcase: 'Tv genres section',
+      when: {
+        id: 'tv-genres-section',
+      },
+      then: {
+        subheader: 'Gatunki seriali',
+      },
+    },
+    {
+      testcase: 'Bottom section',
+      when: {
+        id: 'tertiary-section',
+      },
+      then: {
+        subheader: 'Dowiedz się gdzie obejrzeć ulubione produkcje',
+      },
+    },
+  ].forEach(({ testcase, when, then }) => {
+    it(
+      `Should test homepage subheaders: ${testcase}`,
+      APP_CONFIG,
+      async (app: App) => {
+        const router = app.inject(Router);
+        const el = app.inject(ElementLocator);
 
-      // movies
-      const moviesList = await itemsLists.getNthElement(0);
-      await moviesList.expectChildrensLength(8);
-      await moviesList.expectChildrensData(RoutesPattern.MOVIE_DETAILS);
+        await router.navigateAndWait(Routes.HOMEPAGE);
 
-      // tvs
-      const tvsList = await itemsLists.getNthElement(1);
-      await tvsList.expectChildrensLength(8);
-      await tvsList.expectChildrensData(RoutesPattern.TV_DETAILS);
+        const section = el.locateChild(ContainerElement, when.id);
 
-      const genresLists = el.locateList(
-        GenresListElement,
-        GenresListElement.Selector
-      );
+        const header = section.elementLocator.locateChild(
+          SubHeaderElement,
+          SubHeaderElement.Selector
+        );
+        await header.expectContent(escapeRegExp(then.subheader));
+      }
+    );
+  });
 
-      // movie genres
-      const moviesGenres = await genresLists.getNthElement(0);
-      await moviesGenres.expectChildrensData(RoutesPattern.MOVIE_GENRES);
+  // items lists
+  [
+    {
+      testcase: 'Movies list',
+      when: {
+        id: 'movies-section',
+      },
+      then: {
+        itemsCount: 8,
+        urlPattern: RoutesPattern.MOVIE_DETAILS,
+      },
+    },
+    {
+      testcase: 'Tvs list',
+      when: {
+        id: 'tvs-section',
+      },
+      then: {
+        itemsCount: 8,
+        urlPattern: RoutesPattern.TV_DETAILS,
+      },
+    },
+  ].forEach(({ testcase, when, then }) => {
+    it(
+      `Should test homepage items list: ${testcase}`,
+      APP_CONFIG,
+      async (app: App) => {
+        const router = app.inject(Router);
+        const el = app.inject(ElementLocator);
 
-      // tv genres
-      const tvsGenres = await genresLists.getNthElement(1);
-      await tvsGenres.expectChildrensData(RoutesPattern.TV_GENRES);
-    });
+        await router.navigateAndWait(Routes.HOMEPAGE);
+
+        const section = el.locateChild(ContainerElement, when.id);
+
+        const itemsList = section.elementLocator.locateChild(
+          ListingListElement,
+          ListingListElement.Selector
+        );
+        await itemsList.expectChildrensLength(then.itemsCount);
+        await itemsList.expectChildrensData(then.urlPattern);
+      }
+    );
+  });
+
+  // genres lists
+  [
+    {
+      testcase: 'Movies genres',
+      when: {
+        id: 'movie-genres-section',
+      },
+      then: {
+        urlPattern: RoutesPattern.MOVIE_GENRES,
+      },
+    },
+    {
+      testcase: 'Tvs genres',
+      when: {
+        id: 'tv-genres-section',
+      },
+      then: {
+        urlPattern: RoutesPattern.TV_GENRES,
+      },
+    },
+  ].forEach(({ testcase, when, then }) => {
+    it(
+      `Should test homepage genres list: ${testcase}`,
+      APP_CONFIG,
+      async (app: App) => {
+        const router = app.inject(Router);
+        const el = app.inject(ElementLocator);
+
+        await router.navigateAndWait(Routes.HOMEPAGE);
+
+        const section = el.locateChild(ContainerElement, when.id);
+
+        const itemsList = section.elementLocator.locateChild(
+          GenresListElement,
+          GenresListElement.Selector
+        );
+        await itemsList.expectChildrensData(then.urlPattern);
+      }
+    );
   });
 });
