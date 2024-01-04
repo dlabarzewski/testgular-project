@@ -1,4 +1,9 @@
-import { HeaderElement, SubHeaderElement, ListingListElement, GenresListElement } from '@components';
+import {
+  HeaderElement,
+  SubHeaderElement,
+  ListingListElement,
+  GenresListElement,
+} from '@components';
 import {
   App,
   it,

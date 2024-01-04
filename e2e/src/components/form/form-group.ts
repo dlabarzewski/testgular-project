@@ -1,8 +1,8 @@
 import {
   CssClassBasedActivableElement,
-  StringOrRegExp,
   TextElement,
   cssSelector,
+  escapeRegExp,
 } from '@lowgular/testgular';
 
 export class FormGroupElement extends CssClassBasedActivableElement {
@@ -11,7 +11,7 @@ export class FormGroupElement extends CssClassBasedActivableElement {
   private _errorClass = 'has-danger';
   private _errorMessageSelector = cssSelector('.pristine-error');
 
-  async expectError(message: StringOrRegExp) {
+  async expectError(message: string) {
     await this.expectActive(this._errorClass);
 
     const errorMessage = this.elementLocator.locateChild(
@@ -19,6 +19,6 @@ export class FormGroupElement extends CssClassBasedActivableElement {
       this._errorMessageSelector
     );
 
-    await errorMessage.expectContent(message);
+    await errorMessage.expectContent(escapeRegExp(message));
   }
 }

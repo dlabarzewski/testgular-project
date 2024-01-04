@@ -1,11 +1,4 @@
-import {
-  App,
-  it,
-  describe,
-  Router,
-  ElementLocator,
-  escapeRegExp,
-} from '@lowgular/testgular';
+import { App, it, describe, Router, ElementLocator } from '@lowgular/testgular';
 import { LoginFormElement } from '@components';
 import { login } from '@utils';
 import { APP_CONFIG, Routes } from '@shared';
@@ -22,7 +15,7 @@ describe('Login Page', () => {
       },
       then: {
         values: {
-          email: escapeRegExp('This field requires a valid e-mail address'),
+          email: 'This field requires a valid e-mail address',
         },
       },
     },
@@ -65,8 +58,8 @@ describe('Login Page', () => {
       },
       then: {
         values: {
-          email: escapeRegExp('This field is required'),
-          password: escapeRegExp('This field is required'),
+          email: 'This field is required',
+          password: 'This field is required',
         },
       },
     },
@@ -99,8 +92,8 @@ describe('Login Page', () => {
       testcase: 'empty fields after submit',
       then: {
         values: {
-          email: escapeRegExp('This field is required'),
-          password: escapeRegExp('This field is required'),
+          email: 'This field is required',
+          password: 'This field is required',
         },
       },
     },
