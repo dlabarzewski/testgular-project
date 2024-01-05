@@ -1,18 +1,20 @@
 import { ElementLocator, Router } from '@lowgular/testgular';
-import { LoginFormElement } from '../components/form/login-form';
-import { PANEL_EMAIL, PANEL_PASSWORD, Routes } from '@shared';
+import { LoginFormElement } from '@components/backoffice';
+import { BACKOFFICE_EMAIL, BACKOFFICE_PASSWORD, Routes } from '@shared';
 
 const CREDENTIALS = {
-  email: PANEL_EMAIL,
-  password: PANEL_PASSWORD,
+  email: BACKOFFICE_EMAIL,
+  password: BACKOFFICE_PASSWORD,
 };
 
 export const login = async (router: Router, el: ElementLocator) => {
-  await router.navigateAndWait(Routes.PANEL_LOGIN);
+  await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
 
   const form = el.locateChild(LoginFormElement, LoginFormElement.Selector);
 
   await form.setValues(CREDENTIALS);
 
   await form.submit();
+
+  await router.expectAndWaitForUrl(Routes.BACKOFFICE);
 };

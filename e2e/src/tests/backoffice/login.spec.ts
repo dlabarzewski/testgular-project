@@ -1,5 +1,5 @@
 import { App, it, describe, Router, ElementLocator } from '@lowgular/testgular';
-import { LoginFormElement } from '@components';
+import { LoginFormElement } from '@components/backoffice';
 import { login } from '@utils';
 import { APP_CONFIG, Routes } from '@shared';
 
@@ -27,7 +27,7 @@ describe('Login Page', () => {
         const router = app.inject(Router);
         const el = app.inject(ElementLocator);
 
-        await router.navigateAndWait(Routes.PANEL_LOGIN);
+        await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
 
         const form = el.locateChild(
           LoginFormElement,
@@ -71,7 +71,7 @@ describe('Login Page', () => {
         const router = app.inject(Router);
         const el = app.inject(ElementLocator);
 
-        await router.navigateAndWait(Routes.PANEL_LOGIN);
+        await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
 
         const form = el.locateChild(
           LoginFormElement,
@@ -105,7 +105,7 @@ describe('Login Page', () => {
         const router = app.inject(Router);
         const el = app.inject(ElementLocator);
 
-        await router.navigateAndWait(Routes.PANEL_LOGIN);
+        await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
 
         const form = el.locateChild(
           LoginFormElement,
@@ -124,7 +124,5 @@ describe('Login Page', () => {
     const el = app.inject(ElementLocator);
 
     await login(router, el);
-
-    await router.expectAndWaitForUrl(Routes.PANEL);
   });
 });

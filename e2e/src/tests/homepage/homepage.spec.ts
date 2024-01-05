@@ -3,7 +3,7 @@ import {
   SubHeaderElement,
   ListingListElement,
   GenresListElement,
-} from '@components';
+} from '@components/front';
 import {
   App,
   it,

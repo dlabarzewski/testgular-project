@@ -17,7 +17,8 @@
     "paths": {
       "@utils": ["./e2e/src/utils"],
       "@shared": ["./e2e/src/shared"],
-      "@components": ["./e2e/src/components"],
+      "@components/front": ["./e2e/src/components/front"],
+      "@components/backoffice": ["./e2e/src/components/backoffice"],
     }
   },
   "files": [],

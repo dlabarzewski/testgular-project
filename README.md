@@ -10,6 +10,12 @@ Create `.env` file in main directory and fill in the data based on `.env.example
 npm run install
 ```
 
+## Install playwright
+
+```
+npx playwright install
+```
+
 ## Run tests
 
 ```
