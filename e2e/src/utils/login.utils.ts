@@ -16,5 +16,5 @@ export const login = async (router: Router, el: ElementLocator) => {
 
   await form.submit();
 
-  await router.expectAndWaitForUrl(Routes.BACKOFFICE);
+  await router.expectAndWaitForUrl(Routes.BACKOFFICE_DASHBOARD);
 };
