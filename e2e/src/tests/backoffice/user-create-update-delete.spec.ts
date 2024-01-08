@@ -68,7 +68,7 @@ describe('Backoffice: User CRUD', () => {
 
     const createdRow = await createTableCard.findRowByValue(createData.email, 2);
 
-    /* commented becouse of not being able to find child by using TableRow<ContainerElement>
+    /* commented because of not being able to find child by using TableRow<ContainerElement>
       const createdRowLength = await createdRow.length();
 
       const createdRowActionsColumn = await createdRow.getNthColumn(createdRowLength - 1);
@@ -77,6 +77,8 @@ describe('Backoffice: User CRUD', () => {
     const createdRowColumns = createdRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
 
     const createdRowLength = await createdRowColumns.length();
+
+    // 
 
     const createdRowActionsColumn = await createdRowColumns.getNthElement(createdRowLength - 1);
 
@@ -113,6 +115,8 @@ describe('Backoffice: User CRUD', () => {
     const editedRowColumns = editedRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
 
     const editedRowLength = await editedRowColumns.length();
+
+    // 
 
     const editedRowActionsColumn = await editedRowColumns.getNthElement(editedRowLength - 1);
 
