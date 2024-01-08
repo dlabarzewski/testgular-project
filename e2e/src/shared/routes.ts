@@ -6,6 +6,9 @@ export enum Routes {
   BACKOFFICE_LOGIN = '/panel/login',
   BACKOFFICE_DASHBOARD = '/panel',
   BACKOFFICE_MOVIE_GENRE_LIST = '/panel/movie-genre',
+
+  BACKOFFICE_USER_LIST = '/panel/user',
+  BACKOFFICE_USER_CREATE = '/panel/user/create',
 }
 
 export const MOVIE_SLUG_PATTERN = '[1-9]\\d*\\-[a-z0-9\\-]+';
@@ -29,4 +32,6 @@ export const BackofficeRoutesPattern = {
   TV_EDIT: `${APP_URL}/panel/tv/\\d+/edit`,
 
   MOVIE_GENRE_EDIT: `${APP_URL}/panel/movie-genre/\\d+/edit`,
+
+  USER_EDIT: `${APP_URL}/panel/user/\\d+/edit`,
 };
