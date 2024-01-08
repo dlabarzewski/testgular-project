@@ -18,8 +18,6 @@ type UserFormModel = {
 };
 
 export class UserFormElement extends FormAbstractElement<UserFormModel> {
-  static Selector = cssSelector('form');
-
   protected _selectors: SelectorsType = {
     name: cssSelector('[name="name"]'),
     email: cssSelector('[name="email"]'),

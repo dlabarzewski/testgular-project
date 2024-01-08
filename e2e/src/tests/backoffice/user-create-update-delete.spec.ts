@@ -16,8 +16,7 @@ import {
   BackofficeRoutesPattern,
   Routes,
 } from '@shared';
-import { CardElement, TableCardElement } from '@components/backoffice';
-import { UserFormElement } from 'e2e/src/components/backoffice/form/user-form';
+import { CardElement, TableCardElement, UserFormElement } from '@components/backoffice';
 
 const createData = {
   name: 'teste2e',
