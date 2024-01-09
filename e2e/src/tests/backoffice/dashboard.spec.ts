@@ -19,19 +19,19 @@ describe('Backoffice: Dashboard', () => {
 
     const expectedContent = [
       {
-        title: 'Najnowsze Filmy',
+        title: exactCaseInsensitiveRegexp('Najnowsze Filmy'),
         urlPattern: BackofficeRoutesPattern.MOVIE_EDIT,
       },
       {
-        title: 'Najnowsze Seriale',
+        title: exactCaseInsensitiveRegexp('Najnowsze Seriale'),
         urlPattern: BackofficeRoutesPattern.TV_EDIT,
       },
       {
-        title: 'Najnowsze Filmy Bez Opisu',
+        title: exactCaseInsensitiveRegexp('Najnowsze Filmy Bez Opisu'),
         urlPattern: BackofficeRoutesPattern.MOVIE_EDIT,
       },
       {
-        title: 'Najnowsze Seriale Bez Opisu',
+        title: exactCaseInsensitiveRegexp('Najnowsze Seriale Bez Opisu'),
         urlPattern: BackofficeRoutesPattern.TV_EDIT,
       },
     ];
@@ -46,7 +46,7 @@ describe('Backoffice: Dashboard', () => {
         const data = expectedContent[index];
 
         if (data) {
-          await card.expectTitle(exactCaseInsensitiveRegexp(data.title));
+          await card.expectTitle(data.title);
 
           await card.expectChildrensData(data.urlPattern);
         }

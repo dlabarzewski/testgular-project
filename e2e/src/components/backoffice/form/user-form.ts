@@ -1,8 +1,8 @@
 import {
   ButtonElement,
   InputFormControl,
-  cssSelector,
   exactCaseInsensitiveRegexp,
+  labelSelector,
   textSelector,
 } from '@lowgular/testgular';
 import {
@@ -19,9 +19,9 @@ type UserFormModel = {
 
 export class UserFormElement extends FormAbstractElement<UserFormModel> {
   protected _selectors: SelectorsType = {
-    name: cssSelector('[name="name"]'),
-    email: cssSelector('[name="email"]'),
-    password: cssSelector('[name="password"]'),
+    name: labelSelector(exactCaseInsensitiveRegexp('nazwa')),
+    email: labelSelector(exactCaseInsensitiveRegexp('email')),
+    password: labelSelector(exactCaseInsensitiveRegexp('hasło')),
     submit: textSelector(exactCaseInsensitiveRegexp('zapisz')),
   };
 
