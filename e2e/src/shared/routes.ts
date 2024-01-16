@@ -9,6 +9,7 @@ export enum Routes {
 
   BACKOFFICE_USER_LIST = '/panel/user',
   BACKOFFICE_USER_CREATE = '/panel/user/create',
+  BACKOFFICE_USER_EDIT = '/panel/user/:id/edit',
 }
 
 export const MOVIE_SLUG_PATTERN = '[1-9]\\d*\\-[a-z0-9\\-]+';

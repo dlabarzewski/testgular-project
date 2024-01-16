@@ -17,6 +17,9 @@ import {
   Routes,
 } from '@shared';
 import { CardElement, TableCardElement, UserFormElement } from '@components/backoffice';
+import { UserListPage } from 'e2e/src/pages/backoffice/user-list.page';
+import { UserCreatePage } from 'e2e/src/pages/backoffice/user-create.page';
+import { UserEditPage } from 'e2e/src/pages/backoffice/user-edit.page';
 
 const createData = {
   name: 'teste2e',
@@ -37,102 +40,124 @@ describe('Backoffice: User CRUD', () => {
 
     await login(router, el);
 
+    const userListPage = await app.navigateToRoute<UserListPage>(Routes.BACKOFFICE_USER_LIST);
+
+    await app.waitForTimeout(2000);
+
+    await userListPage.clickCreate();
+
+    await app.waitForTimeout(2000);
+
+    const userCreatePage = app.resolveComponentForRoute<UserCreatePage>(Routes.BACKOFFICE_USER_CREATE);
+
+    await userCreatePage.create(createData);
+
+    await app.waitForTimeout(2000);
+
+    await userListPage.editByEmail(createData.email);
+
+    const userEditPage = app.resolveComponentForRoute<UserEditPage>(Routes.BACKOFFICE_USER_EDIT);
+
+    await app.waitForTimeout(2000);
+
+    await userEditPage.edit(editData);
+
+    await app.waitForTimeout(2000);
+
+    // const userListPage2 = ...
+    await app.navigateToRoute<UserListPage>(Routes.BACKOFFICE_USER_LIST);
+
+    await userListPage.deleteByEmail(editData.email);
+
     // go to list
 
-    await router.navigateAndWait(Routes.BACKOFFICE_USER_LIST);
+    // await router.navigateAndWait(Routes.BACKOFFICE_USER_LIST);
 
     // click create
 
-    const createButton = el.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Dodaj użytkownika')));
+    // const createButton = el.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Dodaj użytkownika')));
 
-    await createButton.click();
+    // await createButton.click();
 
-    await router.expectAndWaitForUrl(Routes.BACKOFFICE_USER_CREATE);
+    // await router.expectAndWaitForUrl(Routes.BACKOFFICE_USER_CREATE);
 
     // create
 
-    const createCard = el.locateChild(CardElement, CardElement.Selector);
+    // const createCard = el.locateChild(CardElement, CardElement.Selector);
 
-    const createForm = createCard.elementLocator.locateChild(UserFormElement, UserFormElement.Selector);
+    // const createForm = createCard.elementLocator.locateChild(UserFormElement, UserFormElement.Selector);
 
-    await createForm.setValues(createData);
+    // await createForm.setValues(createData);
 
-    await createForm.submit();
+    // await createForm.submit();
 
-    await router.expectAndWaitForUrl(Routes.BACKOFFICE_USER_LIST);
+    // await router.expectAndWaitForUrl(Routes.BACKOFFICE_USER_LIST);
 
     // find created row
 
-    const createTableCard = el.locateChild(TableCardElement, TableCardElement.Selector);
 
-    const createdRow = await createTableCard.findRowByValue(createData.email, 2);
+    // const createTableCard = el.locateChild(TableCardElement, TableCardElement.Selector);
 
-    /* commented because of not being able to find child by using TableRow<ContainerElement>
-      const createdRowLength = await createdRow.length();
+    // const createdRow = await createTableCard.findRowByValue(createData.email, 2);
 
-      const createdRowActionsColumn = await createdRow.getNthColumn(createdRowLength - 1);
-    */
+    // const createdRowColumns = createdRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
 
-    const createdRowColumns = createdRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
+    // const createdRowLength = await createdRowColumns.length();
 
-    const createdRowLength = await createdRowColumns.length();
+    // const createdRowActionsColumn = await createdRowColumns.getNthElement(createdRowLength - 1);
 
-    // 
+    // const editButton = createdRowActionsColumn.elementLocator.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Edytuj')));
 
-    const createdRowActionsColumn = await createdRowColumns.getNthElement(createdRowLength - 1);
-
-    const editButton = createdRowActionsColumn.elementLocator.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Edytuj')));
-
-    await editButton.click();
+    // await editButton.click();
 
     // edit
 
-    const editCard = el.locateChild(CardElement, CardElement.Selector);
+    // const editCard = el.locateChild(CardElement, CardElement.Selector);
 
-    const editForm = editCard.elementLocator.locateChild(UserFormElement, UserFormElement.Selector);
+    // const editForm = editCard.elementLocator.locateChild(UserFormElement, UserFormElement.Selector);
 
-    await editForm.setValues(editData);
+    // await editForm.setValues(editData);
 
-    await editForm.submit();
+    // await editForm.submit();
 
-    await router.expectAndWaitForUrl(BackofficeRoutesPattern.USER_EDIT);
+    // await router.expectAndWaitForUrl(BackofficeRoutesPattern.USER_EDIT);
 
-    await router.navigateAndWait(Routes.BACKOFFICE_USER_LIST);
+    // await router.navigateAndWait(Routes.BACKOFFICE_USER_LIST);
 
     // find edited row
 
-    const editedTableCard = el.locateChild(TableCardElement, TableCardElement.Selector);
+    // const editedTableCard = el.locateChild(TableCardElement, TableCardElement.Selector);
 
-    const editedRow = await editedTableCard.findRowByValue(editData.email, 2);
+    // const editedRow = await editedTableCard.findRowByValue(editData.email, 2);
 
-    /*
-      const editedRowLength = await editedRow.length();
+    // /*
+    //   const editedRowLength = await editedRow.length();
 
-      const editedRowActionsColumn = await editedRow.getNthColumn(editedRowLength - 1);
-    */
+    //   const editedRowActionsColumn = await editedRow.getNthColumn(editedRowLength - 1);
+    // */
 
-    const editedRowColumns = editedRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
+    // const editedRowColumns = editedRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
 
-    const editedRowLength = await editedRowColumns.length();
+    // const editedRowLength = await editedRowColumns.length();
 
-    // 
+    // // 
 
-    const editedRowActionsColumn = await editedRowColumns.getNthElement(editedRowLength - 1);
+    // const editedRowActionsColumn = await editedRowColumns.getNthElement(editedRowLength - 1);
 
-    // delete
+    // // delete
 
-    const deleteButton = editedRowActionsColumn.elementLocator.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Usuń')));
+    // const deleteButton = editedRowActionsColumn.elementLocator.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Usuń')));
 
-    await deleteButton.click();
+    // await deleteButton.click();
 
-    await app.waitForTimeout(500);
+    // await app.waitForTimeout(500);
 
-    const deleteModal = el.locateChild(ContainerElement, cssSelector('#delete-modal'))
+    // const deleteModal = el.locateChild(ContainerElement, cssSelector('#delete-modal'))
 
-    const deleteModalButton = deleteModal.elementLocator.locateChild(ButtonElement, textSelector('Usuń'));
+    // const deleteModalButton = deleteModal.elementLocator.locateChild(ButtonElement, textSelector('Usuń'));
 
-    await deleteModalButton.click();
+    // await deleteModalButton.click();
 
-    await router.expectAndWaitForUrl(Routes.BACKOFFICE_USER_LIST);
+    // await router.expectAndWaitForUrl(Routes.BACKOFFICE_USER_LIST);
   });
 });
