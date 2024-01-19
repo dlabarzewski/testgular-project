@@ -8,25 +8,27 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
-    "module": "esnext",
+    "module": "commonjs",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "esModuleInterop": true,
+    "useDefineForClassFields": false,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
     "paths": {
       "@utils": ["./e2e/src/utils"],
       "@shared": ["./e2e/src/shared"],
-      "@components/front": ["./e2e/src/components/front"],
-      "@components/backoffice": ["./e2e/src/components/backoffice"],
+      "@components/front": ["./e2e/src/components/front/index.ts"],
+      "@components/backoffice": ["./e2e/src/components/backoffice"]
     }
   },
   "files": [],
   "include": [],
   "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
     {
       "path": "./tsconfig.spec.json"
     }

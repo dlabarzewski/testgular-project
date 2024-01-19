@@ -5,8 +5,8 @@ import {
   TextElement,
   cssSelector,
 } from '@lowgular/testgular';
+import { DATETIME_MATCHER } from '../../../shared';
 import { CardElement } from './card';
-import { DATETIME_MATCHER } from '@shared';
 
 export class DashboardCardElement extends CardElement {
   private _items = this.elementLocator.locateList(

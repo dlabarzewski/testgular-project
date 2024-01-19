@@ -1,13 +1,14 @@
 import {
   App,
-  it,
-  describe,
-  Router,
   ElementLocator,
-  exactCaseInsensitiveRegexp,
   NumberMatcher,
+  Router,
+  describe,
+  exactCaseInsensitiveRegexp,
+  it,
 } from '@lowgular/testgular';
 import { login } from '@utils';
+import { TableCardElement } from '../../components/backoffice';
 import {
   APP_CONFIG,
   BackofficeRoutesPattern,
@@ -16,8 +17,7 @@ import {
   NOT_EMPTY_MATCHER,
   Routes,
   YES_OR_NOT_MATCHER,
-} from '@shared';
-import { TableCardElement } from '@components/backoffice';
+} from '../../shared';
 
 describe('Backoffice: Movie genre', () => {
   it(`Should test movie genres table content`, APP_CONFIG, async (app: App) => {

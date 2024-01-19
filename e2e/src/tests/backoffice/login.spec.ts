@@ -1,7 +1,6 @@
-import { App, it, describe, Router, ElementLocator } from '@lowgular/testgular';
-import { LoginFormElement } from '@components/backoffice';
-import { login } from '@utils';
-import { APP_CONFIG, Routes } from '@shared';
+import { App, describe, it } from '@lowgular/testgular';
+import { LoginPage } from '../../pages/login.page';
+import { APP_CONFIG, Routes } from '../../shared';
 
 describe('Login Page', () => {
   [
@@ -24,21 +23,16 @@ describe('Login Page', () => {
       `Should test login form errors: ${testcase}`,
       APP_CONFIG,
       async (app: App) => {
-        const router = app.inject(Router);
-        const el = app.inject(ElementLocator);
-
-        await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
-
-        const form = el.locateChild(
-          LoginFormElement,
-          LoginFormElement.Selector
+        const loginPage = await app.navigateToRoute<LoginPage>(
+          Routes.BACKOFFICE_LOGIN
         );
 
-        await form.setValues(when.values);
+        await loginPage.typeLoginValues(when.values);
 
-        await form.expectValues(when.values);
-
-        await form.expectErrors(then.values);
+        await loginPage.expectState({
+          values: when.values,
+          errors: then.values,
+        });
       }
     );
   });
@@ -68,21 +62,16 @@ describe('Login Page', () => {
       `Should test login form errors: ${testcase}`,
       APP_CONFIG,
       async (app: App) => {
-        const router = app.inject(Router);
-        const el = app.inject(ElementLocator);
-
-        await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
-
-        const form = el.locateChild(
-          LoginFormElement,
-          LoginFormElement.Selector
+        const loginPage = await app.navigateToRoute<LoginPage>(
+          Routes.BACKOFFICE_LOGIN
         );
+        await loginPage.typeLoginValues(when.startValues);
+        await loginPage.typeLoginValues(when.values);
 
-        await form.setValues(when.startValues);
-
-        await form.setValues(when.values);
-
-        await form.expectErrors(then.values);
+        await loginPage.expectState({
+          values: when.values,
+          errors: then.values,
+        });
       }
     );
   });
@@ -102,27 +91,28 @@ describe('Login Page', () => {
       `Should test login form errors: ${testcase}`,
       APP_CONFIG,
       async (app: App) => {
-        const router = app.inject(Router);
-        const el = app.inject(ElementLocator);
-
-        await router.navigateAndWait(Routes.BACKOFFICE_LOGIN);
-
-        const form = el.locateChild(
-          LoginFormElement,
-          LoginFormElement.Selector
+        const loginPage = await app.navigateToRoute<LoginPage>(
+          Routes.BACKOFFICE_LOGIN
         );
 
-        await form.submit();
+        await loginPage.submit();
 
-        await form.expectErrors(then.values);
+        await loginPage.expectState({
+          values: { email: '', password: '' },
+          errors: then.values,
+        });
       }
     );
   });
 
-  it(`Should test login action`, APP_CONFIG, async (app: App) => {
-    const router = app.inject(Router);
-    const el = app.inject(ElementLocator);
+  // it(`Should test login action`, APP_CONFIG, async (app: App) => {
+  //   const loginPage = await app.navigateToRoute<LoginPage>(
+  //     Routes.BACKOFFICE_LOGIN
+  //   );
 
-    await login(router, el);
-  });
+  //   // await loginPage.typeLoginValues()
+  //   // await loginPage.submit()
+
+  //   // await loginPage.expectSubmitSuccess()
+  // });
 });

@@ -26,15 +26,15 @@ export class LoginFormElement extends FormAbstractElement<LoginFormModel> {
   protected _controls: ControlsType = {
     email: this.elementLocator.locateChild(
       InputFormControl,
-      this._selectors.email
+      this._selectors['email']
     ),
     password: this.elementLocator.locateChild(
       InputFormControl,
-      this._selectors.password
+      this._selectors['password']
     ),
     submit: this.elementLocator.locateChild(
       ButtonElement,
-      this._selectors.submit
+      this._selectors['submit']
     ),
   };
 }

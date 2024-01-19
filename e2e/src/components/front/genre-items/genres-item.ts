@@ -4,7 +4,7 @@ import {
   StringOrRegExp,
   cssSelector,
 } from '@lowgular/testgular';
-import { NOT_EMPTY_MATCHER } from '@shared';
+import { NOT_EMPTY_MATCHER } from '../../../shared';
 
 export class GenresItemElement extends ContainerElement {
   static Selector = cssSelector('.listing__genres-item');
