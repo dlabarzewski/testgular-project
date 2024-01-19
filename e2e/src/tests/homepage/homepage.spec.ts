@@ -1,19 +1,19 @@
 import {
-  HeaderElement,
-  SubHeaderElement,
-  ListingListElement,
-  GenresListElement,
-} from '@components/front';
-import {
   App,
-  it,
-  describe,
-  Router,
-  ElementLocator,
-  escapeRegExp,
   ContainerElement,
+  ElementLocator,
+  Router,
+  describe,
+  escapeRegExp,
+  it,
 } from '@lowgular/testgular';
-import { APP_CONFIG, Routes, RoutesPattern } from '@shared';
+import {
+  GenresListElement,
+  HeaderElement,
+  ListingListElement,
+  SubHeaderElement,
+} from '../../components/front';
+import { APP_CONFIG, Routes, RoutesPattern } from '../../shared';
 
 describe('Homepage', () => {
   // headers

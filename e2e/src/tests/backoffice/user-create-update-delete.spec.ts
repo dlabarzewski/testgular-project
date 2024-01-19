@@ -1,34 +1,34 @@
 import {
   App,
-  it,
-  describe,
-  Router,
-  ElementLocator,
   ButtonElement,
-  textSelector,
-  exactCaseInsensitiveRegexp,
-  cssSelector,
   ContainerElement,
+  ElementLocator,
+  Router,
+  cssSelector,
+  describe,
+  exactCaseInsensitiveRegexp,
+  it,
+  textSelector,
 } from '@lowgular/testgular';
-import { login } from '@utils';
 import {
-  APP_CONFIG,
-  BackofficeRoutesPattern,
-  Routes,
-} from '@shared';
-import { CardElement, TableCardElement, UserFormElement } from '@components/backoffice';
+  CardElement,
+  TableCardElement,
+  UserFormElement,
+} from '../../components/backoffice';
+import { APP_CONFIG, BackofficeRoutesPattern, Routes } from '../../shared';
+import { login } from '../../utils';
 
 const createData = {
   name: 'teste2e',
   email: 'teste2e@com.pl',
-  password: 'teste2e'
-}
+  password: 'teste2e',
+};
 
 const editData = {
   name: 'teste2e1',
   email: 'teste2e1@com.pl',
-  password: 'teste2e1'
-}
+  password: 'teste2e1',
+};
 
 describe('Backoffice: User CRUD', () => {
   it(`Should create, update and delete user`, APP_CONFIG, async (app: App) => {
@@ -43,7 +43,10 @@ describe('Backoffice: User CRUD', () => {
 
     // click create
 
-    const createButton = el.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Dodaj użytkownika')));
+    const createButton = el.locateChild(
+      ButtonElement,
+      textSelector(exactCaseInsensitiveRegexp('Dodaj użytkownika'))
+    );
 
     await createButton.click();
 
@@ -53,7 +56,10 @@ describe('Backoffice: User CRUD', () => {
 
     const createCard = el.locateChild(CardElement, CardElement.Selector);
 
-    const createForm = createCard.elementLocator.locateChild(UserFormElement, UserFormElement.Selector);
+    const createForm = createCard.elementLocator.locateChild(
+      UserFormElement,
+      UserFormElement.Selector
+    );
 
     await createForm.setValues(createData);
 
@@ -63,9 +69,15 @@ describe('Backoffice: User CRUD', () => {
 
     // find created row
 
-    const createTableCard = el.locateChild(TableCardElement, TableCardElement.Selector);
+    const createTableCard = el.locateChild(
+      TableCardElement,
+      TableCardElement.Selector
+    );
 
-    const createdRow = await createTableCard.findRowByValue(createData.email, 2);
+    const createdRow = await createTableCard.findRowByValue(
+      createData.email,
+      2
+    );
 
     /* commented because of not being able to find child by using TableRow<ContainerElement>
       const createdRowLength = await createdRow.length();
@@ -73,15 +85,23 @@ describe('Backoffice: User CRUD', () => {
       const createdRowActionsColumn = await createdRow.getNthColumn(createdRowLength - 1);
     */
 
-    const createdRowColumns = createdRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
+    const createdRowColumns = createdRow.elementLocator.locateList(
+      ContainerElement,
+      cssSelector('td')
+    );
 
     const createdRowLength = await createdRowColumns.length();
 
-    // 
+    //
 
-    const createdRowActionsColumn = await createdRowColumns.getNthElement(createdRowLength - 1);
+    const createdRowActionsColumn = await createdRowColumns.getNthElement(
+      createdRowLength - 1
+    );
 
-    const editButton = createdRowActionsColumn.elementLocator.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Edytuj')));
+    const editButton = createdRowActionsColumn.elementLocator.locateChild(
+      ButtonElement,
+      textSelector(exactCaseInsensitiveRegexp('Edytuj'))
+    );
 
     await editButton.click();
 
@@ -89,7 +109,10 @@ describe('Backoffice: User CRUD', () => {
 
     const editCard = el.locateChild(CardElement, CardElement.Selector);
 
-    const editForm = editCard.elementLocator.locateChild(UserFormElement, UserFormElement.Selector);
+    const editForm = editCard.elementLocator.locateChild(
+      UserFormElement,
+      UserFormElement.Selector
+    );
 
     await editForm.setValues(editData);
 
@@ -101,7 +124,10 @@ describe('Backoffice: User CRUD', () => {
 
     // find edited row
 
-    const editedTableCard = el.locateChild(TableCardElement, TableCardElement.Selector);
+    const editedTableCard = el.locateChild(
+      TableCardElement,
+      TableCardElement.Selector
+    );
 
     const editedRow = await editedTableCard.findRowByValue(editData.email, 2);
 
@@ -111,25 +137,39 @@ describe('Backoffice: User CRUD', () => {
       const editedRowActionsColumn = await editedRow.getNthColumn(editedRowLength - 1);
     */
 
-    const editedRowColumns = editedRow.elementLocator.locateList(ContainerElement, cssSelector('td'));
+    const editedRowColumns = editedRow.elementLocator.locateList(
+      ContainerElement,
+      cssSelector('td')
+    );
 
     const editedRowLength = await editedRowColumns.length();
 
-    // 
+    //
 
-    const editedRowActionsColumn = await editedRowColumns.getNthElement(editedRowLength - 1);
+    const editedRowActionsColumn = await editedRowColumns.getNthElement(
+      editedRowLength - 1
+    );
 
     // delete
 
-    const deleteButton = editedRowActionsColumn.elementLocator.locateChild(ButtonElement, textSelector(exactCaseInsensitiveRegexp('Usuń')));
+    const deleteButton = editedRowActionsColumn.elementLocator.locateChild(
+      ButtonElement,
+      textSelector(exactCaseInsensitiveRegexp('Usuń'))
+    );
 
     await deleteButton.click();
 
     await app.waitForTimeout(500);
 
-    const deleteModal = el.locateChild(ContainerElement, cssSelector('#delete-modal'))
+    const deleteModal = el.locateChild(
+      ContainerElement,
+      cssSelector('#delete-modal')
+    );
 
-    const deleteModalButton = deleteModal.elementLocator.locateChild(ButtonElement, textSelector('Usuń'));
+    const deleteModalButton = deleteModal.elementLocator.locateChild(
+      ButtonElement,
+      textSelector('Usuń')
+    );
 
     await deleteModalButton.click();
 

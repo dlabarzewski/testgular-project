@@ -10,7 +10,7 @@ import {
   UrlMatcher,
   cssSelector,
 } from '@lowgular/testgular';
-import { NOT_EMPTY_MATCHER, IMAGE_URL } from '@shared';
+import { IMAGE_URL, NOT_EMPTY_MATCHER } from '../../../shared';
 
 export class ListingItemElement extends ContainerElement {
   static Selector = cssSelector('.listing__item');
